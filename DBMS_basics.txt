@@ -1,0 +1,183 @@
+
+SQL> CONNECT AS SYSDBA
+Enter user-name: SYSTEM
+Enter password:
+Connected.
+SQL> CREATE TABLE EMPLOYEE ( Id INT PRIMARY KEY, Name VARCHAR(20), Designation VARCHAR(20), Gender CHAR(1), Dept_no INT);
+
+Table created.
+
+SQL> DESC EMPLOYEE;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ DESIGNATION                                        VARCHAR2(20)
+ GENDER                                             CHAR(1)
+ DEPT_NO                                            NUMBER(38)
+
+SQL> INSERT INTO employee (Id, Name, Designation, Gender, Dept_no) VALUES (1, 'John Smith', 'Manager', 'M', 1);
+
+1 row created.
+
+SQL> INSERT INTO employee (Id, Name, Designation, Gender, Dept_no) VALUES (2, 'Jane Doe', 'Engineer', 'F', 2);
+
+1 row created.
+
+SQL> INSERT INTO employee (Id, Name, Designation, Gender, Dept_no) VALUES (3, 'Bob Johnson', 'Salesperson', 'M', 1);
+
+1 row created.
+
+SQL> INSERT INTO employee (Id, Name, Designation, Gender, Dept_no) VALUES (4, 'Alice Lee', 'Analyst', 'F', 3);
+
+1 row created.
+
+SQL> INSERT INTO employee (Id, Name, Designation, Gender, Dept_no) VALUES (5, 'Mike Brown', 'Manager', 'M', 2);
+
+1 row created.
+
+SQL> INSERT INTO employee (Id, Name, Designation, Gender, Dept_no) VALUES (6, 'Sara Davis', 'Engineer', 'F', 3);
+
+1 row created.
+
+SQL> INSERT INTO employee (Id, Name, Designation, Gender, Dept_no) VALUES (7, 'Tom Wilson', 'Analyst', 'M', 1);
+
+1 row created.
+
+SQL> INSERT INTO employee (Id, Name, Designation, Gender, Dept_no) VALUES (8, 'Karen Jones', 'Salesperson', 'F', 2);
+
+1 row created.
+
+SQL> INSERT INTO employee (Id, Name, Designation, Gender, Dept_no) VALUES (9, 'Jim Lee', 'Engineer', 'M', 3);
+
+1 row created.
+
+SQL> INSERT INTO employee (Id, Name, Designation, Gender, Dept_no) VALUES (10, 'Lisa Kim', 'Manager', 'F', 1);
+
+1 row created.
+
+SQL> select * from employee;
+
+        ID NAME                 DESIGNATION          G    DEPT_NO
+---------- -------------------- -------------------- - ----------
+         1 John Smith           Manager              M          1
+         2 Jane Doe             Engineer             F          2
+         3 Bob Johnson          Salesperson          M          1
+         4 Alice Lee            Analyst              F          3
+         5 Mike Brown           Manager              M          2
+         6 Sara Davis           Engineer             F          3
+         7 Tom Wilson           Analyst              M          1
+         8 Karen Jones          Salesperson          F          2
+         9 Jim Lee              Engineer             M          3
+        10 Lisa Kim             Manager              F          1
+
+10 rows selected.
+
+SQL> SELECT COUNT(DEPT_NO) FROM EMPLOYEE;
+
+COUNT(DEPT_NO)
+--------------
+            10
+
+SQL> SELECT COUNT(DISTINCT DEPT_NO) FROM EMPLOYEE;
+
+COUNT(DISTINCTDEPT_NO)
+----------------------
+                     3
+
+SQL> SELECT COUNT(*) FROM EMPLOYEE;
+
+  COUNT(*)
+----------
+        10
+
+SQL> SELECT SUM(DEPT_NO) FROM EMPLOYEE;
+
+SUM(DEPT_NO)
+------------
+          19
+
+SQL> SELECT AVG(DEPT_NO) FROM EMPLOYEE;
+
+AVG(DEPT_NO)
+------------
+         1.9
+
+SQL> SELECT MAX(DEPT_NO) FROM EMPLOYEE;
+
+MAX(DEPT_NO)
+------------
+           3
+
+SQL> SELECT MIN(DEPT_NO) FROM EMPLOYEE;
+
+MIN(DEPT_NO)
+------------
+           1
+
+SQL> SELECT SYSDATE FROM DUAL;
+
+SYSDATE
+---------
+24-MAR-23
+
+SQL> SELECT LAST_DAY(SYSDATE) FROM DUAL;
+
+LAST_DAY(
+---------
+31-MAR-23
+
+SQL> SELECT MONTHS_BETWEEN(SYSDATE, '03-DEC-2004') FROM DUAL;
+
+MONTHS_BETWEEN(SYSDATE,'03-DEC-2004')
+-------------------------------------
+                           219.691599
+
+SQL> SELECT NEXT_DAY(SYSDATE, 'FRIDAY') FROM DUAL;
+
+NEXT_DAY(
+---------
+31-MAR-23
+
+SQL> SELECT EXTRACT (MONTH FROM SYSDATE) FROM DUAL;
+
+EXTRACT(MONTHFROMSYSDATE)
+-------------------------
+                        3
+
+SQL> SELECT EXTRACT (YEAR FROM SYSDATE) FROM DUAL;
+
+EXTRACT(YEARFROMSYSDATE)
+------------------------
+                    2023
+
+SQL> SELECT ABS(5), ABS(-1020), ABS(897.22) FROM DUAL;
+
+    ABS(5) ABS(-1020) ABS(897.22)
+---------- ---------- -----------
+         5       1020      897.22
+
+SQL> SELECT CIEL(-5.3), CIEL(21.3) FROM DUAL;
+SELECT CIEL(-5.3), CIEL(21.3) FROM DUAL
+                   *
+ERROR at line 1:
+ORA-00904: "CIEL": invalid identifier
+
+
+SQL> SELECT CEIL(-5.3), CEIL(21.3) FROM DUAL;
+
+CEIL(-5.3) CEIL(21.3)
+---------- ----------
+        -5         22
+
+SQL> SELECT FLOOR(-5.6), FLOOR(32.445) FROM DUAL;
+
+FLOOR(-5.6) FLOOR(32.445)
+----------- -------------
+         -6            32
+
+SQL> SELECT EXP(5) FROM DUAL;
+
+    EXP(5)
+----------
+148.413159
