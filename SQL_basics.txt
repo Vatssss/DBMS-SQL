@@ -1,0 +1,160 @@
+SQL> DESC STUDENT
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLL                                               NUMBER(6)
+ NAME                                               VARCHAR2(20)
+ GENDER                                             CHAR(1)
+ AGE                                                NUMBER(3)
+ CGPA                                               NUMBER(4,2)
+
+SQL> INSERT INTO STUDENT(NAME, ROLL, AGE, GENDER, CGPA) VALUES ('VATS', 1698, 19,'M', 9.02);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT(NAME, ROLL, AGE, GENDER, CGPA) VALUES ('COTTON', 2378, 19,'F', 8.28);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT(NAME, ROLL, AGE, GENDER, CGPA) VALUES ('ANSHUM', 2298, 20,'M', 9.56);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT(NAME, ROLL, AGE, GENDER, CGPA) VALUES ('HARSHIT', 2111, 18,'M', 5.60);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT(NAME, ROLL, AGE, GENDER, CGPA) VALUES ('ANANYA', 1283, 21,'F', 9.74);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT(NAME, ROLL, AGE, GENDER, CGPA) VALUES ('SAKSHI', 3293, 19,'F', 7.80);
+
+1 row created.
+
+SQL> SELECT* FROM STUDENT;
+
+      ROLL NAME                 G        AGE       CGPA
+---------- -------------------- - ---------- ----------
+      1698 VATS                 M         19       9.02
+      2378 COTTON               F         19       8.28
+      2298 ANSHUM               M         20       9.56
+      2111 HARSHIT              M         18        5.6
+      1283 ANANYA               F         21       9.74
+      3293 SAKSHI               F         19        7.8
+
+6 rows selected.
+
+SQL> SELECT* FROM STUDENT ORDER BY AGE;
+
+      ROLL NAME                 G        AGE       CGPA
+---------- -------------------- - ---------- ----------
+      2111 HARSHIT              M         18        5.6
+      1698 VATS                 M         19       9.02
+      2378 COTTON               F         19       8.28
+      3293 SAKSHI               F         19        7.8
+      2298 ANSHUM               M         20       9.56
+      1283 ANANYA               F         21       9.74
+
+6 rows selected.
+
+SQL> SELECT* FROM STUDENT ORDER BY CGPA;
+
+      ROLL NAME                 G        AGE       CGPA
+---------- -------------------- - ---------- ----------
+      2111 HARSHIT              M         18        5.6
+      3293 SAKSHI               F         19        7.8
+      2378 COTTON               F         19       8.28
+      1698 VATS                 M         19       9.02
+      2298 ANSHUM               M         20       9.56
+      1283 ANANYA               F         21       9.74
+
+6 rows selected.
+
+SQL> SELECT* FROM STUDENT ORDER BY CGPA[DESC];
+SELECT* FROM STUDENT ORDER BY CGPA[DESC]
+                                  *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> ALTER TABLE STUDENT ADD (SECTION NUMBER(3));
+
+Table altered.
+
+SQL> ALTER TABLE STUDENT MODIFY (GENDER CHAR(2));
+
+Table altered.
+
+SQL> SELECT* FROM STUDENT;
+
+      ROLL NAME                 GE        AGE       CGPA    SECTION
+---------- -------------------- -- ---------- ---------- ----------
+      1698 VATS                 M          19       9.02
+      2378 COTTON               F          19       8.28
+      2298 ANSHUM               M          20       9.56
+      2111 HARSHIT              M          18        5.6
+      1283 ANANYA               F          21       9.74
+      3293 SAKSHI               F          19        7.8
+
+6 rows selected.
+
+SQL> UPDATE STUDENT SET SETION=30;
+UPDATE STUDENT SET SETION=30
+                   *
+ERROR at line 1:
+ORA-00904: "SETION": invalid identifier
+
+
+SQL> UPDATE STUDENT SET SECTION=30;
+
+6 rows updated.
+
+SQL> SELECT* FROM STUDENT;
+
+      ROLL NAME                 GE        AGE       CGPA    SECTION
+---------- -------------------- -- ---------- ---------- ----------
+      1698 VATS                 M          19       9.02         30
+      2378 COTTON               F          19       8.28         30
+      2298 ANSHUM               M          20       9.56         30
+      2111 HARSHIT              M          18        5.6         30
+      1283 ANANYA               F          21       9.74         30
+      3293 SAKSHI               F          19        7.8         30
+
+6 rows selected.
+
+SQL> ALTER TABLE STUDENT DROP COLUMN CGPA;
+ALTER TABLE STUDENT DROP COLUMN CGPA
+*
+ERROR at line 1:
+ORA-12988: cannot drop column from table owned by SYS
+
+
+SQL> SELECT* FROM STUDENT;
+
+      ROLL NAME                 GE        AGE       CGPA    SECTION
+---------- -------------------- -- ---------- ---------- ----------
+      1698 VATS                 M          19       9.02         30
+      2378 COTTON               F          19       8.28         30
+      2298 ANSHUM               M          20       9.56         30
+      2111 HARSHIT              M          18        5.6         30
+      1283 ANANYA               F          21       9.74         30
+      3293 SAKSHI               F          19        7.8         30
+
+6 rows selected.
+
+SQL> UPDATE STUDENT SET ROLL=0000 WHERE AGE=19;
+
+3 rows updated.
+
+SQL> SELECT* FROM STUDENT;
+
+      ROLL NAME                 GE        AGE       CGPA    SECTION
+---------- -------------------- -- ---------- ---------- ----------
+         0 VATS                 M          19       9.02         30
+         0 COTTON               F          19       8.28         30
+      2298 ANSHUM               M          20       9.56         30
+      2111 HARSHIT              M          18        5.6         30
+      1283 ANANYA               F          21       9.74         30
+         0 SAKSHI               F          19        7.8         30
+
+6 rows selected.
