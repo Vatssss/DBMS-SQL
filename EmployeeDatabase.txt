@@ -1,0 +1,67 @@
+-- Create an index on the Salary column in Employees table
+CREATE INDEX idx_salary ON Employees(Salary);
+
+-- Drop an index
+DROP INDEX idx_salary ON Employees;
+
+-- Create a view
+CREATE VIEW EmployeeDetails AS
+SELECT Employees.EmployeeID, Employees.FirstName, Employees.LastName, Departments.DepartmentName
+FROM Employees
+INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID;
+
+-- Drop a view
+DROP VIEW EmployeeDetails;
+
+-- Insert data into Employees from another table
+INSERT INTO Employees (EmployeeID, FirstName, LastName, BirthDate, Position, Salary, DepartmentID)
+SELECT EmployeeID, FirstName, LastName, BirthDate, Position, Salary, DepartmentID
+FROM OldEmployees;
+
+-- Update data in Employees based on a join with Departments
+UPDATE Employees
+SET Employees.Salary = Employees.Salary * 1.1
+FROM Employees
+INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID
+WHERE Departments.DepartmentName = 'IT';
+
+-- Create a new user
+CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
+
+-- Drop a user
+DROP USER 'newuser'@'localhost';
+
+-- Grant all privileges to a user
+GRANT ALL PRIVILEGES ON *.* TO 'newuser'@'localhost';
+
+-- Revoke all privileges from a user
+REVOKE ALL PRIVILEGES ON *.* FROM 'newuser'@'localhost';
+
+-- Self Join: Find pairs of employees where one is the manager of the other
+SELECT e1.FirstName AS Employee, e2.FirstName AS Manager
+FROM Employees e1
+INNER JOIN Employees e2 ON e1.ManagerID = e2.EmployeeID;
+
+-- Union: Combine results from two tables
+SELECT FirstName, LastName FROM Employees
+UNION
+SELECT FirstName, LastName FROM OldEmployees;
+
+-- Subquery: Select employees who earn more than the average salary
+SELECT FirstName, LastName
+FROM Employees
+WHERE Salary > (SELECT AVG(Salary) FROM Employees);
+
+-- Group By: Find the average salary per department
+SELECT Departments.DepartmentName, AVG(Employees.Salary) AS AverageSalary
+FROM Employees
+INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID
+GROUP BY Departments.DepartmentName;
+
+-- Having: Find departments with an average salary greater than 50000
+SELECT Departments.DepartmentName, AVG(Employees.Salary) AS AverageSalary
+FROM Employees
+INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID
+GROUP BY Departments.DepartmentName
+HAVING AVG(Employees.Salary) > 50000;
+
